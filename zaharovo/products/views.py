@@ -1,7 +1,16 @@
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.pagination import PageNumberPagination
 
 from .models import Product, Category
 from .serializers import ProductSerializer, CategorySerializer
+
+
+class ProductPagination(PageNumberPagination):
+    page_size = 2
+    page_size_query_param = 'page_size'
+    max_page_size = 50
 
 
 class ProductViewSet(ModelViewSet):
@@ -15,6 +24,13 @@ class ProductViewSet(ModelViewSet):
     """
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    pagination_class = ProductPagination
+
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+
+    filterset_fields = ['category__slug']  # Фильтрация по слагу категории
+    search_fields = ['name', 'description']  # Поиск по имени и описанию
+    ordering_fields = ['price', 'name']  # Сортировка
 
 
 class CategoryViewSet(ModelViewSet):

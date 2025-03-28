@@ -1,7 +1,5 @@
 from django.core.validators import MinValueValidator
 from django.db import models
-from django.utils.text import slugify
-from transliterate import translit
 
 
 class Category(models.Model):

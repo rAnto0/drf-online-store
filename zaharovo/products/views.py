@@ -5,6 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 
 from .models import Product, Category
 from .serializers import ProductSerializer, CategorySerializer
+from .permissions import IsAdminOrReadOnly
 
 
 class ProductPagination(PageNumberPagination):
@@ -25,6 +26,7 @@ class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     pagination_class = ProductPagination
+    permission_classes = [IsAdminOrReadOnly]
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
 
@@ -45,3 +47,4 @@ class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     lookup_field = 'slug'  # Используем slug для идентификации вместо id
+    permission_classes = [IsAdminOrReadOnly]

@@ -19,7 +19,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from accounts.views import RegisterView
+from accounts.views import RegisterView, ProfileDetailAPIView, AddressListCreateAPIView, AddressDetailAPIView
 from products.views import ProductViewSet, CategoryViewSet
 
 router = DefaultRouter()
@@ -31,7 +31,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/register/', RegisterView.as_view(), name='register'),
+
     # Эндпоинты для получения JWT-токена:
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('api/profile/', ProfileDetailAPIView.as_view(), name='profile-detail'),
+    path('api/addresses/', AddressListCreateAPIView.as_view(), name='address-list'),
+    path('api/addresses/<int:pk>/', AddressDetailAPIView.as_view(), name='address-detail'),
 ]

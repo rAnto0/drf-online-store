@@ -1,20 +1,8 @@
 from rest_framework import generics, permissions
 
-from .models import Cart
+from .models import CartItem
 from .serializers import CartSerializer, CartItemSerializer
-
-
-def get_cart_from_request(request):
-    """Утилитная функция для получения корзины из запроса."""
-    if request.user.is_authenticated:
-        cart, created = Cart.objects.get_or_create(user=request.user)
-    else:
-        session_key = request.session.session_key
-        if not session_key:
-            request.session.create()
-            session_key = request.session.session_key
-        cart, created = Cart.objects.get_or_create(session_key=session_key)
-    return cart
+from .utils import get_cart_from_request
 
 
 class CartDetailAPIView(generics.RetrieveAPIView):
@@ -37,7 +25,17 @@ class CartItemAddAPIView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         cart = get_cart_from_request(self.request)
-        serializer.save(cart=cart)
+        product = serializer.validated_data.get('product')
+        quantity = serializer.validated_data.get('quantity', 1)
+        cart_item, created = CartItem.objects.get_or_create(
+            cart=cart,
+            product=product,
+            defaults={'quantity': quantity}
+        )
+        # Если элемент уже существует, просто увеличиваем количество
+        if not created:
+            cart_item.quantity += quantity
+            cart_item.save()
 
 
 class CartItemUpdateDeleteAPIView(generics.RetrieveUpdateDestroyAPIView):

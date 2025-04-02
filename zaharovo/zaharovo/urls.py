@@ -35,4 +35,7 @@ urlpatterns = [
 
     # Эндпоинты приложения cart
     path('api/cart/', include('cart.urls')),
+
+    # Эндпоинты приложения order
+    path('api/order/', include('order.urls')),
 ]

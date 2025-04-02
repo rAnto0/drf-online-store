@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'accounts.apps.AccountsConfig',
     'cart.apps.CartConfig',
+    'order.apps.OrderConfig',
     'rest_framework',
     'django_filters',
     'rest_framework_simplejwt',

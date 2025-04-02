@@ -23,7 +23,7 @@ class ProductViewSet(ModelViewSet):
     - PUT/PATCH /api/products/<int:pk>/ — обновление товара
     - DELETE /api/products/<int:pk>/ — удаление товара
     """
-    queryset = Product.objects.all()
+    queryset = Product.objects.order_by('id')
     serializer_class = ProductSerializer
     pagination_class = ProductPagination
     permission_classes = [IsAdminOrReadOnly]

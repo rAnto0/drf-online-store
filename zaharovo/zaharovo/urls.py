@@ -19,6 +19,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from products.views import ProductViewSet, CategoryViewSet
+from .yasg import urlpatterns as doc_urls
 
 router = DefaultRouter()
 
@@ -39,3 +40,5 @@ urlpatterns = [
     # Эндпоинты приложения order
     path('api/order/', include('order.urls')),
 ]
+
+urlpatterns += doc_urls

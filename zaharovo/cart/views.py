@@ -37,6 +37,10 @@ class CartItemAddAPIView(generics.CreateAPIView):
             cart_item.quantity += quantity
             cart_item.save()
 
+        # Присваиваем сохранённый объект сериализатору,
+        # чтобы стандартный метод create() вернул данные с id и другими полями
+        serializer.instance = cart_item
+
 
 class CartItemUpdateDeleteAPIView(generics.RetrieveUpdateDestroyAPIView):
     """

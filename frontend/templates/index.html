@@ -2,36 +2,114 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Магазин</title>
-    <!-- Подключаем Bootstrap для быстрого оформления -->
-    <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-            integrity="sha384-Mai6rV9sEpJMOHzB9g6D3eJrSzzo30w+GGkoF6m0+rzt3Qq4F0w3D5F1SBpZfRcv"
-            crossorigin="anonymous">
+    <title>Магазин Захарово</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
-    <h1 class="mt-5 mb-4">Магазин</h1>
-    <div class="row">
-        {% if products %}
-        {% for product in products.results %}
-        <div class="card col-md-4 m-2">
-            <div class="card-body">
-                <h2 class="card-title">{{ product.name }}</h2>
-                <h3 class="card-category">Категория: {{ product.category }}</h3>
-                <p class="card-text">Описание: {{ product.description or "Нет описания" }}</p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Захарово</a>
+            <div class="navbar-nav ml-auto">
+                {% if 'access_token' in session %}
+                    <a class="nav-item nav-link" href="{{ url_for('cart') }}">
+                        Корзина {% if cart and cart.items and cart.items is sequence %}({{ cart.items|length }}){% endif %}
+                    </a>
+                    <a class="nav-item nav-link" href="{{ url_for('logout') }}">Выйти</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="{{ url_for('login') }}">Войти</a>
+                    <a class="nav-item nav-link" href="{{ url_for('register') }}">Регистрация</a>
+                {% endif %}
             </div>
         </div>
-        {% endfor %}
-        {% else %}
-        <div class="col-12">
-            <div class="alert alert-warning" role="alert">
-                Не удалось получить данные с API или список пуст.
+    </nav>
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="row">
+            <!-- Фильтры -->
+            <div class="col-md-3">
+                <h4>Фильтры</h4>
+                <form method="get" action="{{ url_for('index') }}">
+                    <div class="form-group">
+                        <label>Категория:</label>
+                        <select name="category" class="form-control">
+                            <option value="">Все категории</option>
+                            {% for category in categories %}
+                                <option value="{{ category.slug }}" 
+                                        {% if category.slug == current_category %}selected{% endif %}>
+                                    {{ category.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Поиск:</label>
+                        <input type="text" name="search" class="form-control" 
+                               value="{{ current_search or '' }}" placeholder="Поиск по названию">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Сортировка:</label>
+                        <select name="ordering" class="form-control">
+                            <option value="">По умолчанию</option>
+                            <option value="price" {% if current_ordering == 'price' %}selected{% endif %}>
+                                По возрастанию цены
+                            </option>
+                            <option value="-price" {% if current_ordering == '-price' %}selected{% endif %}>
+                                По убыванию цены
+                            </option>
+                            <option value="name" {% if current_ordering == 'name' %}selected{% endif %}>
+                                По названию А-Я
+                            </option>
+                            <option value="-name" {% if current_ordering == '-name' %}selected{% endif %}>
+                                По названию Я-А
+                            </option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Применить</button>
+                </form>
+            </div>
+            <!-- Список товаров -->
+            <div class="col-md-9">
+                <div class="row">
+                    {% if products.results %}
+                        {% for product in products.results %}
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    {% if product.image %}
+                                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ product.name }}</h5>
+                                        <p class="card-text">{{ product.description }}</p>
+                                        <p class="card-text"><strong>Цена: {{ product.price }} ₽</strong></p>
+                                        {% if 'access_token' in session %}
+                                            <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post">
+                                                <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" class="form-control mb-2">
+                                                <button type="submit" class="btn btn-primary">В корзину</button>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12">
+                            <div class="alert alert-warning">Товары не найдены</div>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
-        {% endif %}
     </div>
-</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

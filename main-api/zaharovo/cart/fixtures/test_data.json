@@ -1,0 +1,20 @@
+[
+    {
+        "model": "cart.cart",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "session_key": null,
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "cart.cartitem",
+        "pk": 1,
+        "fields": {
+            "cart": 1,
+            "product": 1,
+            "quantity": 2
+        }
+    }
+]

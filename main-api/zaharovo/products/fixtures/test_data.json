@@ -1,0 +1,107 @@
+[
+    {
+        "model": "products.category",
+        "pk": 1,
+        "fields": {
+            "name": "Electronics",
+            "slug": "electronics",
+            "description": "Category for electronic products"
+        }
+    },
+    {
+        "model": "products.category",
+        "pk": 2,
+        "fields": {
+            "name": "Home Appliances",
+            "slug": "home-appliances",
+            "description": "Category for home appliances"
+        }
+    },
+    {
+        "model": "products.category",
+        "pk": 3,
+        "fields": {
+            "name": "Books",
+            "slug": "books",
+            "description": "Category for books and literature"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 1,
+        "fields": {
+            "category": 1,
+            "name": "Smartphone",
+            "description": "Latest smartphone model",
+            "price": "699.99",
+            "stock": 50,
+            "created_at": "2025-05-19T12:00:00Z",
+            "updated_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 2,
+        "fields": {
+            "category": 1,
+            "name": "Laptop",
+            "description": "High-performance laptop",
+            "price": "1299.99",
+            "stock": 30,
+            "created_at": "2025-05-19T12:00:00Z",
+            "updated_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 3,
+        "fields": {
+            "category": 2,
+            "name": "Washing Machine",
+            "description": "Energy-efficient washing machine",
+            "price": "499.99",
+            "stock": 20,
+            "created_at": "2025-05-19T12:00:00Z",
+            "updated_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 4,
+        "fields": {
+            "category": 2,
+            "name": "Refrigerator",
+            "description": "Spacious and energy-saving refrigerator",
+            "price": "899.99",
+            "stock": 15,
+            "created_at": "2025-05-19T12:00:00Z",
+            "updated_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 5,
+        "fields": {
+            "category": 3,
+            "name": "Fiction Book",
+            "description": "Bestselling fiction novel",
+            "price": "19.99",
+            "stock": 100,
+            "created_at": "2025-05-19T12:00:00Z",
+            "updated_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 6,
+        "fields": {
+            "category": 3,
+            "name": "Science Book",
+            "description": "Informative science book",
+            "price": "29.99",
+            "stock": 80,
+            "created_at": "2025-05-19T12:00:00Z",
+            "updated_at": "2025-05-19T12:00:00Z"
+        }
+    }
+]

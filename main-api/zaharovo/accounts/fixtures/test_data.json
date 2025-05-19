@@ -1,0 +1,21 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "testuser",
+            "email": "testuser@example.com",
+            "is_staff": false,
+            "is_superuser": false
+        }
+    },
+    {
+        "model": "accounts.profile",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "birth_date": "1990-01-01",
+            "phone": "1234567890"
+        }
+    }
+]

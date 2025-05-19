@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 import requests
 from functools import wraps
+import os
 
 app = Flask(__name__)
-app.secret_key = "your-secret-key"  # Замените на безопасный секретный ключ
+app.secret_key = os.getenv("SECRET_KEY_FRONTEND", "default-secret-key")
 API_BASE_URL = "http://main-api:8000/api"
 
 
@@ -15,6 +16,12 @@ def login_required(f):
         return f(*args, **kwargs)
 
     return decorated_function
+
+
+def get_auth_headers():
+    if "access_token" in session:
+        return {"Authorization": f'Bearer {session["access_token"]}'}
+    return {}
 
 
 @app.route("/")
@@ -68,6 +75,7 @@ def index():
 
     except requests.exceptions.RequestException as e:
         print(f"Ошибка запроса к API: {e}")
+        flash("Ошибка при запросе к API. Попробуйте позже.", "danger")
 
     return render_template(
         "index.html",
@@ -104,19 +112,29 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        data = {
-            "username": request.form["username"],
-            "email": request.form["email"],
-            "password": request.form["password"],
-        }
+        username = request.form.get("username")
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        if not username or not email or not password:
+            flash("Все поля обязательны для заполнения.", "danger")
+            return redirect(url_for("register"))
+
+        # Отправка данных на API
         try:
-            # Отправляем запрос на регистрацию
-            response = requests.post(f"{API_BASE_URL}/accounts/register/", json=data)
+            response = requests.post(
+                f"{API_BASE_URL}/accounts/register/",
+                json={
+                    "username": username,
+                    "email": email,
+                    "password": password,
+                },
+            )
             if response.status_code == 201:
                 # После успешной регистрации, выполняем вход
                 login_response = requests.post(
                     f"{API_BASE_URL}/accounts/token/",
-                    json={"username": data["username"], "password": data["password"]},
+                    json={"username": username, "password": password},
                 )
                 if login_response.status_code == 200:
                     tokens = login_response.json()
@@ -137,24 +155,19 @@ def register():
 @login_required
 def cart():
     try:
-        headers = {"Authorization": f'Bearer {session["access_token"]}'}
+        headers = get_auth_headers()
         response = requests.get(f"{API_BASE_URL}/cart/", headers=headers)
         cart_data = {"items": []}  # Значение по умолчанию
-        
+
         if response.status_code == 200:
-            try:
-                cart_data = response.json()
-                if not isinstance(cart_data, dict):
-                    cart_data = {"items": []}
-                elif "items" not in cart_data:
-                    cart_data["items"] = []
-            except (ValueError, TypeError):
-                # Если возникла ошибка при разборе JSON
-                cart_data = {"items": []}
-                
+            cart_data = response.json()
+            # Убедимся, что cart_data["items"] — это список
+            if not isinstance(cart_data.get("items"), list):
+                cart_data["items"] = []
     except requests.exceptions.RequestException:
         cart_data = {"items": []}
-        
+
+    # print("cart_data:", cart_data)  # Отладочный вывод
     return render_template("cart.html", cart=cart_data)
 
 
@@ -177,6 +190,23 @@ def add_to_cart(product_id):
     except requests.exceptions.RequestException:
         flash("Ошибка сервера")
     return redirect(url_for("index"))
+
+
+@app.route("/cart/remove/<int:item_id>", methods=["POST"])
+@login_required
+def remove_from_cart(item_id):
+    try:
+        headers = {"Authorization": f'Bearer {session["access_token"]}'}
+        response = requests.delete(
+            f"{API_BASE_URL}/cart/items/{item_id}/", headers=headers
+        )
+        if response.status_code == 204:
+            flash("Товар удалён из корзины")
+        else:
+            flash("Ошибка при удалении товара")
+    except requests.exceptions.RequestException:
+        flash("Ошибка сервера")
+    return redirect(url_for("cart"))
 
 
 @app.route("/logout")

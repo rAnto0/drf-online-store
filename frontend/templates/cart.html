@@ -1,53 +1,48 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
     <title>Корзина - Магазин Захарово</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-  </head>
-  <body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
     <div class="container mt-4">
-      <h1>Корзина</h1>
-      {% if cart and cart.items %}
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Товар</th>
-              <th>Цена</th>
-              <th>Количество</th>
-              <th>Итого</th>
-              <th>Действия</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in cart.items %}
-            <tr>
-                <td>{{ item.product.name }}</td>
-                <td>{{ item.product.price }}</td>
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.product.price * item.quantity }}</td>
-                <td>
-                    <form action="{{ url_for('remove_from_cart', item_id=item.id) }}" method="POST">
-                        <button type="submit" class="btn btn-danger btn-sm">
-                            Удалить
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-      {% else %}
-      <p>Ваша корзина пуста</p>
-      {% endif %}
-      <a href="{{ url_for('index') }}" class="btn btn-primary"
-        >Вернуться к покупкам</a
-      >
+        <h1>Корзина</h1>
+        <!-- <p>Тип cart: {{ cart.__class__.__name__ }}</p>
+        <p>Тип cart.items: {{ cart.items.__class__.__name__ }}</p> -->
+        {% if cart["items"] %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Итого</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart["items"] %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.product.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price | float * item.quantity }}</td>
+                        <td>
+                            <form action="{{ url_for('remove_from_cart', item_id=item.id) }}" method="POST">
+                                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>Ваша корзина пуста</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Вернуться к покупкам</a>
+        {% endif %}
     </div>
-  </body>
+</body>
 </html>

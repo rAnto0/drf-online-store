@@ -78,7 +78,7 @@
             </div>
             <!-- Список товаров -->
             <div class="col-md-9">
-                <div class="row">
+                <div id="product-list" class="row">
                     {% if products.results %}
                         {% for product in products.results %}
                             <div class="col-md-4 mb-4">
@@ -111,5 +111,17 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).on("change", "select[name='category'], select[name='ordering']", function() {
+            const params = {
+                category: $("select[name='category']").val(),
+                ordering: $("select[name='ordering']").val(),
+                search: $("input[name='search']").val(),
+            };
+            $.get("/", params, function(data) {
+                $("#product-list").html($(data).find("#product-list").html());
+            });
+        });
+    </script>
 </body>
 </html>

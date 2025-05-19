@@ -4,7 +4,7 @@ from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = "your-secret-key"  # Замените на безопасный секретный ключ
-API_BASE_URL = "http://127.0.0.1:8000/api"
+API_BASE_URL = "http://main-api:8000/api"
 
 
 def login_required(f):

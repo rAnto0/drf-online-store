@@ -1,0 +1,59 @@
+services:
+  nginx:
+    image: nginx:latest
+    networks:
+      - back_net
+    expose:
+      - 8088
+    ports:
+      - "80:8088"
+    volumes:
+      - ./main-api/zaharovo/logs:/app/zaharovo/logs
+      - ./nginx:/etc/nginx/conf.d
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    networks:
+      - back_net
+  main-api:
+    build: ./main-api
+    working_dir: /app/zaharovo
+    networks:
+      - front_net
+      - back_net
+    command: "gunicorn -c gunicorn.py zaharovo.wsgi:application"
+    volumes:
+      - ./main-api/zaharovo:/app/zaharovo
+      - ./main-api/zaharovo/logs:/app/zaharovo/logs
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+  frontend:
+    build: ./frontend
+    networks:
+      - front_net
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    depends_on:
+      - main-api
+
+networks:
+  front_net:
+    driver: bridge
+  back_net:
+    driver: bridge
+
+volumes:
+  postgres_data:

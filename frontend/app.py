@@ -30,6 +30,7 @@ def index():
     category = request.args.get("category")
     search = request.args.get("search")
     ordering = request.args.get("ordering")
+    page = request.args.get("page", 1)  # Получаем номер страницы, по умолчанию 1
 
     # Формирование параметров запроса
     params = {}
@@ -39,6 +40,7 @@ def index():
         params["search"] = search
     if ordering:
         params["ordering"] = ordering
+    params["page"] = page
 
     # Инициализация переменных с безопасными значениями по умолчанию
     products = {"results": []}
@@ -85,6 +87,7 @@ def index():
         current_category=category,
         current_search=search,
         current_ordering=ordering,
+        current_page=int(page),
     )
 
 
@@ -145,7 +148,15 @@ def register():
                     flash("Регистрация успешна, но возникла ошибка при входе")
             else:
                 error_message = response.json()
-                flash(str(error_message))
+                errors = []
+                # обработка сырых данных чтобы не было такого - {'password': ['Убедитесь, что это значение содержит не менее 8 символов.']}
+                if isinstance(error_message, dict):
+                    for field, msgs in error_message.items():
+                        for msg in msgs:
+                            errors.append(f"{field.capitalize()}: {msg}")
+                    flash("<br>".join(errors), "danger")
+                else:
+                    flash(str(error_message), "danger")
         except requests.exceptions.RequestException:
             flash("Ошибка сервера при регистрации")
     return render_template("register.html")

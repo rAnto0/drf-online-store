@@ -1,0 +1,679 @@
+[
+    {
+        "model": "products.category",
+        "pk": 1,
+        "fields": {
+            "name": "Electronics",
+            "slug": "electronics",
+            "description": "Electronic devices"
+        }
+    },
+    {
+        "model": "products.category",
+        "pk": 2,
+        "fields": {
+            "name": "Home Appliances",
+            "slug": "home-appliances",
+            "description": "Appliances for home"
+        }
+    },
+    {
+        "model": "products.category",
+        "pk": 3,
+        "fields": {
+            "name": "Books",
+            "slug": "books",
+            "description": "Books and novels"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 1,
+        "fields": {
+            "category": 1,
+            "name": "Party American",
+            "description": "Speak meet family wrong.",
+            "price": "650.24",
+            "stock": 40,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 2,
+        "fields": {
+            "category": 2,
+            "name": "Assume Wide",
+            "description": "Eye memory everybody theory image glass reality.",
+            "price": "760.01",
+            "stock": 64,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 3,
+        "fields": {
+            "category": 2,
+            "name": "Rise Down",
+            "description": "Treat raise Congress black blue.",
+            "price": "345.82",
+            "stock": 90,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 4,
+        "fields": {
+            "category": 3,
+            "name": "Leg Cell",
+            "description": "White billion everything fact bill.",
+            "price": "1160.5",
+            "stock": 61,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 5,
+        "fields": {
+            "category": 2,
+            "name": "Enter Off",
+            "description": "Man deep now environmental hold than health.",
+            "price": "702.65",
+            "stock": 34,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 6,
+        "fields": {
+            "category": 1,
+            "name": "Message Son",
+            "description": "Road way Republican these apply.",
+            "price": "1235.24",
+            "stock": 44,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 7,
+        "fields": {
+            "category": 2,
+            "name": "Address You",
+            "description": "Present soldier word popular modern.",
+            "price": "1159.0",
+            "stock": 27,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 8,
+        "fields": {
+            "category": 3,
+            "name": "Still Hundred",
+            "description": "Him few create hand try center speech.",
+            "price": "1009.43",
+            "stock": 19,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 9,
+        "fields": {
+            "category": 1,
+            "name": "Process And",
+            "description": "Break fear pick entire their.",
+            "price": "1324.12",
+            "stock": 73,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 10,
+        "fields": {
+            "category": 2,
+            "name": "Draw Music",
+            "description": "Sea service nothing role.",
+            "price": "824.75",
+            "stock": 52,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 11,
+        "fields": {
+            "category": 3,
+            "name": "Investment Fire",
+            "description": "Statement chair attack country case coach source.",
+            "price": "225.57",
+            "stock": 79,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 12,
+        "fields": {
+            "category": 1,
+            "name": "Feeling Success",
+            "description": "Analysis for visit direction main represent final.",
+            "price": "199.58",
+            "stock": 42,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 13,
+        "fields": {
+            "category": 3,
+            "name": "Example Fact",
+            "description": "Manage want concern there.",
+            "price": "1217.49",
+            "stock": 20,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 14,
+        "fields": {
+            "category": 3,
+            "name": "Beyond Table",
+            "description": "Record less actually life data.",
+            "price": "1400.18",
+            "stock": 33,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 15,
+        "fields": {
+            "category": 3,
+            "name": "Each Could",
+            "description": "Important city simply father true indicate.",
+            "price": "543.29",
+            "stock": 28,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 16,
+        "fields": {
+            "category": 2,
+            "name": "Fight Century",
+            "description": "Stand coach effect miss reflect present.",
+            "price": "556.89",
+            "stock": 20,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 17,
+        "fields": {
+            "category": 3,
+            "name": "Tree Head",
+            "description": "Move stage red.",
+            "price": "740.37",
+            "stock": 60,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 18,
+        "fields": {
+            "category": 2,
+            "name": "Lead Scene",
+            "description": "Year interview case art ask.",
+            "price": "1418.79",
+            "stock": 41,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 19,
+        "fields": {
+            "category": 3,
+            "name": "Outside Red",
+            "description": "Trip all relationship sit theory.",
+            "price": "811.87",
+            "stock": 22,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 20,
+        "fields": {
+            "category": 2,
+            "name": "Heavy Reflect",
+            "description": "Treat network certainly half remember game increase.",
+            "price": "132.66",
+            "stock": 96,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 21,
+        "fields": {
+            "category": 2,
+            "name": "Stop Would",
+            "description": "Guy miss exactly lay nature.",
+            "price": "482.47",
+            "stock": 13,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 22,
+        "fields": {
+            "category": 1,
+            "name": "Next Describe",
+            "description": "Task these woman economic.",
+            "price": "1469.58",
+            "stock": 73,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 23,
+        "fields": {
+            "category": 1,
+            "name": "Clearly Simply",
+            "description": "Fear top choose campaign.",
+            "price": "509.26",
+            "stock": 69,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 24,
+        "fields": {
+            "category": 3,
+            "name": "Keep Me",
+            "description": "Arm fish ok lead protect Republican full.",
+            "price": "1133.83",
+            "stock": 36,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 25,
+        "fields": {
+            "category": 2,
+            "name": "Not North",
+            "description": "Though whose democratic end.",
+            "price": "364.01",
+            "stock": 15,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 26,
+        "fields": {
+            "category": 2,
+            "name": "During Take",
+            "description": "Good concern catch require.",
+            "price": "165.52",
+            "stock": 78,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 27,
+        "fields": {
+            "category": 3,
+            "name": "Although Body",
+            "description": "Finish TV air stock news hand drop present.",
+            "price": "410.75",
+            "stock": 60,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 28,
+        "fields": {
+            "category": 1,
+            "name": "Property Certainly",
+            "description": "Mr property only power reduce.",
+            "price": "841.83",
+            "stock": 64,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 29,
+        "fields": {
+            "category": 1,
+            "name": "School Improve",
+            "description": "Serious moment age inside.",
+            "price": "550.86",
+            "stock": 11,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 30,
+        "fields": {
+            "category": 2,
+            "name": "Where Dark",
+            "description": "Impact director box condition.",
+            "price": "1174.1",
+            "stock": 38,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 31,
+        "fields": {
+            "category": 2,
+            "name": "These Party",
+            "description": "Yes others hotel television suddenly because.",
+            "price": "503.25",
+            "stock": 74,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 32,
+        "fields": {
+            "category": 1,
+            "name": "Particular Notice",
+            "description": "Machine buy business officer say process.",
+            "price": "1104.55",
+            "stock": 58,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 33,
+        "fields": {
+            "category": 3,
+            "name": "Partner Reality",
+            "description": "Detail career wife why chance read check build.",
+            "price": "282.81",
+            "stock": 69,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 34,
+        "fields": {
+            "category": 2,
+            "name": "List Great",
+            "description": "American together various government fine son hour card.",
+            "price": "571.16",
+            "stock": 42,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 35,
+        "fields": {
+            "category": 1,
+            "name": "Look Partner",
+            "description": "Boy oil get Congress hand save check.",
+            "price": "330.26",
+            "stock": 26,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 36,
+        "fields": {
+            "category": 1,
+            "name": "Research Event",
+            "description": "Continue fast career.",
+            "price": "1169.76",
+            "stock": 31,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 37,
+        "fields": {
+            "category": 3,
+            "name": "Social Join",
+            "description": "Half character learn order.",
+            "price": "925.53",
+            "stock": 91,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 38,
+        "fields": {
+            "category": 1,
+            "name": "Write Available",
+            "description": "Themselves often young run process.",
+            "price": "1347.22",
+            "stock": 74,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 39,
+        "fields": {
+            "category": 3,
+            "name": "Sound Office",
+            "description": "Southern nor style base.",
+            "price": "795.74",
+            "stock": 69,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 40,
+        "fields": {
+            "category": 1,
+            "name": "View Material",
+            "description": "Pressure rule reason once natural force simple.",
+            "price": "1110.65",
+            "stock": 62,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 41,
+        "fields": {
+            "category": 3,
+            "name": "Sport Continue",
+            "description": "Age quickly daughter.",
+            "price": "761.22",
+            "stock": 71,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 42,
+        "fields": {
+            "category": 1,
+            "name": "Improve Into",
+            "description": "Arm feel may may economic size.",
+            "price": "1489.79",
+            "stock": 86,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 43,
+        "fields": {
+            "category": 3,
+            "name": "Board Visit",
+            "description": "Wall blood gas travel culture.",
+            "price": "385.56",
+            "stock": 52,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 44,
+        "fields": {
+            "category": 2,
+            "name": "Economic Song",
+            "description": "Try trial movie.",
+            "price": "175.16",
+            "stock": 62,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 45,
+        "fields": {
+            "category": 1,
+            "name": "Me Process",
+            "description": "Evidence picture these agent.",
+            "price": "473.08",
+            "stock": 39,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 46,
+        "fields": {
+            "category": 1,
+            "name": "Test Ahead",
+            "description": "Public mention marriage image condition forward here.",
+            "price": "1334.14",
+            "stock": 40,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 47,
+        "fields": {
+            "category": 3,
+            "name": "Threat Sea",
+            "description": "Short drug this professional result.",
+            "price": "454.58",
+            "stock": 47,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 48,
+        "fields": {
+            "category": 1,
+            "name": "We Stand",
+            "description": "Cold use public establish worry fast.",
+            "price": "1298.08",
+            "stock": 33,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 49,
+        "fields": {
+            "category": 2,
+            "name": "Present Professor",
+            "description": "Risk look for music.",
+            "price": "544.09",
+            "stock": 75,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 50,
+        "fields": {
+            "category": 2,
+            "name": "Blue Bad",
+            "description": "Whole debate growth put exist.",
+            "price": "418.82",
+            "stock": 92,
+            "created_at": "2025-05-31T20:55:00.585377Z",
+            "updated_at": "2025-05-31T20:55:00.585377Z"
+        }
+    }
+]

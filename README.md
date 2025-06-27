@@ -17,32 +17,32 @@ DJANGO_SETTINGS_MODULE=zaharovo.settings
 2. Запуск с помощью **docker-compose**
 
 2.1. Сборка, запуск и остановка
-    Собрать и запустить
-    ```bash
-    docker compose up --build
-    ```
+Собрать и запустить
+```bash
+docker compose up --build
+```
 
-    Остановить
-    ```bash
-    docker compose down
-    ```
+Остановить
+```bash
+docker compose down
+```
 
 2.2. Выполнение миграций и загрузка fixtures
-    Запуск консоли сервиса main-api*(ctrl+D выйти)*
-    ```bash
-    docker compose exec main-api bash
-    ```
+Запуск консоли сервиса main-api*(ctrl+D выйти)*
+```bash
+docker compose exec main-api bash
+```
 
-    Выполнение миграций
-    ```bash
-    python manage.py migrate
-    ```
+Выполнение миграций
+```bash
+python manage.py migrate
+```
 
-    Загрузка шаблона
-    ```bash
-    python manage.py loaddata generated_products.json
-    ```
+Загрузка шаблона
+```bash
+python manage.py loaddata generated_products.json
+```
 
 2.3. Заходим на сайт
-    http://127.0.0.1:5000/ - фронтенд
-    http://localhost:8000/ - api
+http://127.0.0.1:5000/ - фронтенд
+http://localhost:8000/ - api

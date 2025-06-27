@@ -3,6 +3,9 @@ services:
     image: nginx:latest
     networks:
       - back_net
+      - front_net
+    depends_on:
+      - main-api
     expose:
       - 8088
     ports:

@@ -1,6 +1,6 @@
 # Запуск проекта
 
-1. Создать в корне проекта **.env** с содержимым:
+## Создать в корне проекта **.env** с содержимым:
 ```
 DEBUG=True
 DB_NAME=dbname
@@ -14,9 +14,9 @@ DJANGO_ALLOWED_HOSTS=main-api,localhost,127.0.0.1
 DJANGO_SETTINGS_MODULE=zaharovo.settings
 ```
 
-2. Запуск с помощью **docker-compose**
+## Запуск с помощью **docker-compose**
 
-2.1. Сборка, запуск и остановка
+### Сборка, запуск и остановка
 Собрать и запустить
 ```bash
 docker compose up --build
@@ -27,7 +27,7 @@ docker compose up --build
 docker compose down
 ```
 
-2.2. Выполнение миграций и загрузка fixtures
+### Выполнение миграций и загрузка fixtures
 Запуск консоли сервиса main-api*(ctrl+D выйти)*
 ```bash
 docker compose exec main-api bash
@@ -43,6 +43,6 @@ python manage.py migrate
 python manage.py loaddata generated_products.json
 ```
 
-2.3. Заходим на сайт
+### Ссылки
 http://127.0.0.1:5000/ - фронтенд
 http://localhost:8000/ - api

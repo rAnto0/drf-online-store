@@ -1,18 +1,15 @@
 services:
   nginx:
-    image: nginx:latest
-    networks:
-      - back_net
-      - front_net
+    build:
+      context: ./nginx
     depends_on:
-      - main-api
-    expose:
-      - 8088
+      main-api:
+        condition: service_healthy
     ports:
       - "80:8088"
     volumes:
       - ./main-api/zaharovo/logs:/app/zaharovo/logs
-      - ./nginx:/etc/nginx/conf.d
+  
   db:
     image: postgres:15
     volumes:
@@ -21,42 +18,32 @@ services:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-    networks:
-      - back_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
   main-api:
     build: ./main-api
-    working_dir: /app/zaharovo
-    networks:
-      - front_net
-      - back_net
-    command: "gunicorn -c gunicorn.py zaharovo.wsgi:application"
-    volumes:
-      - ./main-api/zaharovo:/app/zaharovo
-      - ./main-api/zaharovo/logs:/app/zaharovo/logs
-    ports:
-      - "8000:8000"
     env_file:
       - .env
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import socket; s=socket.socket(); s.settimeout(2); s.connect(('127.0.0.1', 8000)); s.close()\""]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+  
   frontend:
     build: ./frontend
-    networks:
-      - front_net
-    volumes:
-      - ./frontend:/app
-    ports:
-      - "5000:5000"
     env_file:
       - .env
     depends_on:
-      - main-api
-
-networks:
-  front_net:
-    driver: bridge
-  back_net:
-    driver: bridge
+      main-api:
+        condition: service_healthy
 
 volumes:
   postgres_data:

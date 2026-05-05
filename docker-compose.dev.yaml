@@ -1,0 +1,22 @@
+services:
+  db:
+    ports:
+      - "5432:5432"
+
+  main-api:
+    command: uv run python /app/zaharovo/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./main-api/zaharovo:/app/zaharovo
+    ports:
+      - "8000:8000"
+
+  frontend:
+    command: uv run flask run --host=0.0.0.0 --port=5000
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5000:5000"
+
+  nginx:
+    volumes:
+      - ./nginx/main-api.conf:/etc/nginx/conf.d/default.conf:ro

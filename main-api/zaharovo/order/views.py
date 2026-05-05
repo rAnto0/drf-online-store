@@ -14,7 +14,9 @@ class CreateOrderAPIView(generics.CreateAPIView):
         cart_items = cart.items.all()
 
         if not cart_items.exists():
-            return Response({"detail": "Корзина пуста."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"detail": "Корзина пуста."}, status=status.HTTP_400_BAD_REQUEST
+            )
 
         # Создаем заказ
         order = Order.objects.create(
@@ -28,7 +30,7 @@ class CreateOrderAPIView(generics.CreateAPIView):
                 order=order,
                 product=item.product,
                 quantity=item.quantity,
-                price=item.product.price  # фиксируем цену товара на момент заказа
+                price=item.product.price,  # фиксируем цену товара на момент заказа
             )
             total_amount += item.quantity * item.product.price
 

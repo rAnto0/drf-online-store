@@ -9,16 +9,18 @@ from .utils import get_cart_from_request
 class CartItemSerializer(serializers.ModelSerializer):
     # Для создания товара в корзине, можно использовать только id продукта
     product = ProductSerializer(read_only=True)
-    product_id = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), source='product', write_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all(), source="product", write_only=True
+    )
 
     class Meta:
         model = CartItem
-        fields = ['id', 'product', 'product_id', 'quantity']
+        fields = ["id", "product", "product_id", "quantity"]
 
     def validate(self, data):
-        product = data.get('product')
-        new_quantity = data.get('quantity', 1)
-        request = self.context.get('request')
+        product = data.get("product")
+        new_quantity = data.get("quantity", 1)
+        request = self.context.get("request")
 
         cart = get_cart_from_request(request)
 
@@ -30,7 +32,9 @@ class CartItemSerializer(serializers.ModelSerializer):
             total_quantity = new_quantity
 
         if product and total_quantity > product.stock:
-            raise serializers.ValidationError(f"Нельзя добавить {total_quantity} шт., доступно только {product.stock}.")
+            raise serializers.ValidationError(
+                f"Нельзя добавить {total_quantity} шт., доступно только {product.stock}."
+            )
         return data
 
 
@@ -39,5 +43,5 @@ class CartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ['id', 'user', 'session_key', 'created_at', 'items']
-        read_only_fields = ['user', 'session_key', 'created_at', 'items']
+        fields = ["id", "user", "session_key", "created_at", "items"]
+        read_only_fields = ["user", "session_key", "created_at", "items"]

@@ -15,9 +15,7 @@ class OrderAPITest(APITestCase):
     def setUp(self):
         # Создаем пользователя и авторизуем его
         self.user = User.objects.create_user(
-            username="orderuser",
-            email="order@example.com",
-            password="password123"
+            username="orderuser", email="order@example.com", password="password123"
         )
         self.client.force_authenticate(user=self.user)
 
@@ -25,26 +23,26 @@ class OrderAPITest(APITestCase):
         self.category = Category.objects.create(
             name="Order Category",
             slug="order-category",
-            description="Test category for orders"
+            description="Test category for orders",
         )
         self.product = Product.objects.create(
             category=self.category,
             name="Order Product",
             description="Product description",
             price=Decimal("50.00"),
-            stock=10
+            stock=10,
         )
 
         # URL для создания заказа
-        self.create_order_url = reverse('order-create')
+        self.create_order_url = reverse("order-create")
         # URL для получения списка заказов
-        self.order_list_url = reverse('order-list')
+        self.order_list_url = reverse("order-list")
 
     def test_create_order_empty_cart(self):
         """
         Проверяем, что если корзина пуста, оформление заказа возвращает ошибку.
         """
-        response = self.client.post(self.create_order_url, format='json')
+        response = self.client.post(self.create_order_url, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.data["detail"], "Корзина пуста.")
 
@@ -58,7 +56,7 @@ class OrderAPITest(APITestCase):
         # Добавляем в корзину 2 единицы продукта (при цене 50.00 => итог 100.00)
         CartItem.objects.create(cart=cart, product=self.product, quantity=2)
 
-        response = self.client.post(self.create_order_url, format='json')
+        response = self.client.post(self.create_order_url, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         # Проверяем, что заказ создан и итоговая сумма равна 100.00
@@ -78,7 +76,9 @@ class OrderAPITest(APITestCase):
         """
         # Создаем заказ вручную для пользователя
         order = Order.objects.create(user=self.user, total_amount=Decimal("150.00"))
-        OrderItem.objects.create(order=order, product=self.product, quantity=3, price=self.product.price)
+        OrderItem.objects.create(
+            order=order, product=self.product, quantity=3, price=self.product.price
+        )
 
         response = self.client.get(self.order_list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)

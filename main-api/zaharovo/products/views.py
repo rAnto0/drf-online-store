@@ -10,7 +10,7 @@ from .permissions import IsAdminOrReadOnly
 
 class ProductPagination(PageNumberPagination):
     page_size = 15
-    page_size_query_param = 'page_size'
+    page_size_query_param = "page_size"
     max_page_size = 50
 
 
@@ -23,16 +23,17 @@ class ProductViewSet(ModelViewSet):
     - PUT/PATCH /api/products/<int:pk>/ — обновление товара
     - DELETE /api/products/<int:pk>/ — удаление товара
     """
-    queryset = Product.objects.order_by('id')
+
+    queryset = Product.objects.order_by("id")
     serializer_class = ProductSerializer
     pagination_class = ProductPagination
     permission_classes = [IsAdminOrReadOnly]
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
 
-    filterset_fields = ['category__slug']  # Фильтрация по слагу категории
-    search_fields = ['name', 'description']  # Поиск по имени и описанию
-    ordering_fields = ['price', 'name']  # Сортировка
+    filterset_fields = ["category__slug"]  # Фильтрация по слагу категории
+    search_fields = ["name", "description"]  # Поиск по имени и описанию
+    ordering_fields = ["price", "name"]  # Сортировка
 
 
 class CategoryViewSet(ModelViewSet):
@@ -44,7 +45,8 @@ class CategoryViewSet(ModelViewSet):
     - PUT/PATCH /api/categories/<slug:slug>/ — обновление категории
     - DELETE /api/categories/<slug:slug>/ — удаление категории
     """
+
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    lookup_field = 'slug'  # Используем slug для идентификации вместо id
+    lookup_field = "slug"  # Используем slug для идентификации вместо id
     permission_classes = [IsAdminOrReadOnly]

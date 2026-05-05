@@ -6,14 +6,39 @@ from datetime import datetime
 
 fake = Faker()
 
+
 class Command(BaseCommand):
-    help = 'Generate product fixtures (JSON)'
+    help = "Generate product fixtures (JSON)"
 
     def handle(self, *args, **kwargs):
         categories = [
-            {"model": "products.category", "pk": 1, "fields": {"name": "Electronics", "slug": "electronics", "description": "Electronic devices"}},
-            {"model": "products.category", "pk": 2, "fields": {"name": "Home Appliances", "slug": "home-appliances", "description": "Appliances for home"}},
-            {"model": "products.category", "pk": 3, "fields": {"name": "Books", "slug": "books", "description": "Books and novels"}},
+            {
+                "model": "products.category",
+                "pk": 1,
+                "fields": {
+                    "name": "Electronics",
+                    "slug": "electronics",
+                    "description": "Electronic devices",
+                },
+            },
+            {
+                "model": "products.category",
+                "pk": 2,
+                "fields": {
+                    "name": "Home Appliances",
+                    "slug": "home-appliances",
+                    "description": "Appliances for home",
+                },
+            },
+            {
+                "model": "products.category",
+                "pk": 3,
+                "fields": {
+                    "name": "Books",
+                    "slug": "books",
+                    "description": "Books and novels",
+                },
+            },
         ]
 
         products = []
@@ -27,19 +52,21 @@ class Command(BaseCommand):
             price = round(randint(100, 1500) + fake.random.random(), 2)
             stock = randint(10, 100)
 
-            products.append({
-                "model": "products.product",
-                "pk": product_id,
-                "fields": {
-                    "category": category_id,
-                    "name": name,
-                    "description": description,
-                    "price": str(price),
-                    "stock": stock,
-                    "created_at": now,
-                    "updated_at": now
+            products.append(
+                {
+                    "model": "products.product",
+                    "pk": product_id,
+                    "fields": {
+                        "category": category_id,
+                        "name": name,
+                        "description": description,
+                        "price": str(price),
+                        "stock": stock,
+                        "created_at": now,
+                        "updated_at": now,
+                    },
                 }
-            })
+            )
             product_id += 1
 
         data = categories + products
@@ -47,4 +74,8 @@ class Command(BaseCommand):
         with open("products/fixtures/generated_products.json", "w") as f:
             json.dump(data, f, indent=4)
 
-        self.stdout.write(self.style.SUCCESS("✔ 50+ продуктов сгенерированы в fixtures/generated_products.json"))
+        self.stdout.write(
+            self.style.SUCCESS(
+                "✔ 50+ продуктов сгенерированы в fixtures/generated_products.json"
+            )
+        )

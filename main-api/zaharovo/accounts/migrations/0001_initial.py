@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,25 +14,75 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Address',
+            name="Address",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('street', models.CharField(max_length=255, verbose_name='Улица')),
-                ('house', models.CharField(max_length=50, verbose_name='Дом')),
-                ('apartment', models.CharField(blank=True, max_length=50, null=True, verbose_name='Квартира')),
-                ('entrance', models.CharField(blank=True, max_length=50, null=True, verbose_name='Подъезд')),
-                ('floor', models.CharField(blank=True, max_length=50, null=True, verbose_name='Этаж')),
-                ('is_default', models.BooleanField(default=False, verbose_name='Адрес по умолчанию')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='addresses', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("street", models.CharField(max_length=255, verbose_name="Улица")),
+                ("house", models.CharField(max_length=50, verbose_name="Дом")),
+                (
+                    "apartment",
+                    models.CharField(
+                        blank=True, max_length=50, null=True, verbose_name="Квартира"
+                    ),
+                ),
+                (
+                    "entrance",
+                    models.CharField(
+                        blank=True, max_length=50, null=True, verbose_name="Подъезд"
+                    ),
+                ),
+                (
+                    "floor",
+                    models.CharField(
+                        blank=True, max_length=50, null=True, verbose_name="Этаж"
+                    ),
+                ),
+                (
+                    "is_default",
+                    models.BooleanField(
+                        default=False, verbose_name="Адрес по умолчанию"
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="addresses",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('birth_date', models.DateField(blank=True, null=True)),
-                ('phone', models.CharField(blank=True, max_length=11)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='profile', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("birth_date", models.DateField(blank=True, null=True)),
+                ("phone", models.CharField(blank=True, max_length=11)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="profile",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

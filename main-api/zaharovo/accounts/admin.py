@@ -6,7 +6,7 @@ from .models import Profile, Address
 class ProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False
-    verbose_name_plural = 'Профили'
+    verbose_name_plural = "Профили"
 
 
 class CustomUserAdmin(admin.ModelAdmin):

@@ -5,9 +5,7 @@ from products.models import Category, Product
 class CategoryModelTest(TestCase):
     def setUp(self):
         self.category = Category.objects.create(
-            name="Test Category",
-            slug="test-category",
-            description="Test description"
+            name="Test Category", slug="test-category", description="Test description"
         )
 
     def test_category_str(self):
@@ -17,16 +15,14 @@ class CategoryModelTest(TestCase):
 class ProductModelTest(TestCase):
     def setUp(self):
         self.category = Category.objects.create(
-            name="Test Category",
-            slug="test-category",
-            description="Test description"
+            name="Test Category", slug="test-category", description="Test description"
         )
         self.product = Product.objects.create(
             category=self.category,
             name="Test Product",
             description="Test product description",
             price=99.99,
-            stock=10
+            stock=10,
         )
 
     def test_product_str(self):

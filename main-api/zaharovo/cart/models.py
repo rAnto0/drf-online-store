@@ -10,9 +10,11 @@ class Cart(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
-        related_name='carts'
+        related_name="carts",
     )
-    session_key = models.CharField(max_length=40, null=True, blank=True)  # Для неавторизованных пользователей
+    session_key = models.CharField(
+        max_length=40, null=True, blank=True
+    )  # Для неавторизованных пользователей
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -22,7 +24,7 @@ class Cart(models.Model):
 
 
 class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 

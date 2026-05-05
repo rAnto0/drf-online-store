@@ -20,7 +20,7 @@ def login_required(f):
 
 def get_auth_headers():
     if "access_token" in session:
-        return {"Authorization": f'Bearer {session["access_token"]}'}
+        return {"Authorization": f"Bearer {session['access_token']}"}
     return {}
 
 
@@ -57,7 +57,7 @@ def index():
         categories = categories_response.json()
         # Получение корзины, если пользователь авторизован
         if "access_token" in session:
-            headers = {"Authorization": f'Bearer {session["access_token"]}'}
+            headers = {"Authorization": f"Bearer {session['access_token']}"}
             try:
                 cart_response = requests.get(f"{API_BASE_URL}/cart/", headers=headers)
                 if cart_response.status_code == 200:
@@ -186,7 +186,7 @@ def cart():
 @login_required
 def add_to_cart(product_id):
     try:
-        headers = {"Authorization": f'Bearer {session["access_token"]}'}
+        headers = {"Authorization": f"Bearer {session['access_token']}"}
         data = {
             "product_id": product_id,
             "quantity": int(request.form.get("quantity", 1)),
@@ -207,7 +207,7 @@ def add_to_cart(product_id):
 @login_required
 def remove_from_cart(item_id):
     try:
-        headers = {"Authorization": f'Bearer {session["access_token"]}'}
+        headers = {"Authorization": f"Bearer {session['access_token']}"}
         response = requests.delete(
             f"{API_BASE_URL}/cart/items/{item_id}/", headers=headers
         )

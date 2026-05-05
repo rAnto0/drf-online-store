@@ -16,7 +16,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ["username", "email", "password"]
 
     def create(self, validated_data):
         # Используем create_user, чтобы пароль корректно хэшировался
@@ -25,16 +25,16 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(source='user.username', read_only=True)
-    email = serializers.EmailField(source='user.email')
+    username = serializers.CharField(source="user.username", read_only=True)
+    email = serializers.EmailField(source="user.email")
 
     class Meta:
         model = Profile
-        fields = ['username', 'email', 'birth_date', 'phone']
+        fields = ["username", "email", "birth_date", "phone"]
 
     def update(self, instance, validated_data):
-        user_data = validated_data.pop('user', {})
-        email = user_data.get('email')
+        user_data = validated_data.pop("user", {})
+        email = user_data.get("email")
         if email:
             instance.user.email = email
             instance.user.save()
@@ -45,7 +45,15 @@ class ProfileSerializer(serializers.ModelSerializer):
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
-        fields = ['id', 'street', 'house', 'apartment', 'entrance', 'floor', 'is_default']
+        fields = [
+            "id",
+            "street",
+            "house",
+            "apartment",
+            "entrance",
+            "floor",
+            "is_default",
+        ]
 
 
 class ChangePasswordSerializer(serializers.Serializer):
@@ -53,7 +61,7 @@ class ChangePasswordSerializer(serializers.Serializer):
     new_password = serializers.CharField(required=True, min_length=8)
 
     def validate_old_password(self, value):
-        user = self.context['request'].user
+        user = self.context["request"].user
         if not user.check_password(value):
             raise serializers.ValidationError("Неверный старый пароль.")
         return value
@@ -64,12 +72,14 @@ class PasswordResetRequestSerializer(serializers.Serializer):
 
     def validate_email(self, value):
         if not User.objects.filter(email=value).exists():
-            raise serializers.ValidationError("Пользователь с таким email не существует.")
+            raise serializers.ValidationError(
+                "Пользователь с таким email не существует."
+            )
         return value
 
     def save(self, **kwargs):
-        request = self.context.get('request')
-        email = self.validated_data['email']
+        request = self.context.get("request")
+        email = self.validated_data["email"]
         user = User.objects.get(email=email)
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
         token = default_token_generator.make_token(user)
@@ -90,20 +100,22 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
 
     def validate(self, attrs):
         try:
-            uid = force_str(urlsafe_base64_decode(attrs['uid']))
+            uid = force_str(urlsafe_base64_decode(attrs["uid"]))
             user = User.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            raise serializers.ValidationError({'uid': 'Неверный UID.'})
+            raise serializers.ValidationError({"uid": "Неверный UID."})
 
-        if not default_token_generator.check_token(user, attrs['token']):
-            raise serializers.ValidationError({'token': 'Неверный или просроченный токен.'})
+        if not default_token_generator.check_token(user, attrs["token"]):
+            raise serializers.ValidationError(
+                {"token": "Неверный или просроченный токен."}
+            )
 
-        attrs['user'] = user
+        attrs["user"] = user
         return attrs
 
     def save(self, **kwargs):
-        user = self.validated_data['user']
-        new_password = self.validated_data['new_password']
+        user = self.validated_data["user"]
+        new_password = self.validated_data["new_password"]
         user.set_password(new_password)
         user.save()
         return user
